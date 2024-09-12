@@ -1,2 +1,2 @@
-# Project-1
-First Minecraft: Bedrock Addon development project.
+# Reusable Rockets
+First Minecraft: Bedrock Addon development project that aims to add Reusable Rockets to Minecraft.
