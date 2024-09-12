@@ -1,0 +1,14 @@
+{
+	"num_mip_levels": 4,
+	"padding": 8,
+	"resource_pack_name": "Reusable-Rockets",
+	"texture_name": "atlas.terrain",
+	"texture_data": {
+		"launchpad_block": {
+			"textures": "textures/blocks/launchpad_block.png"
+		},
+		"launchpad_block_up": {
+			"textures": "textures/blocks/launchpad_block_up.png"
+		}
+	}
+}

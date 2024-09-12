@@ -1,0 +1,52 @@
+{
+	"format_version": 2,
+	"metadata": {
+		"authors": [
+			"npweber"
+		],
+		"generated_with": {
+			"bridge": [
+				"2.7.36"
+			],
+			"dash": [
+				"0.11.7"
+			]
+		}
+	},
+	"header": {
+		"name": "pack.name",
+		"description": "pack.description",
+		"min_engine_version": [
+			1,
+			21,
+			0
+		],
+		"uuid": "fedcdca0-ac62-48be-a3d2-b91684ec775e",
+		"version": [
+			1,
+			0,
+			0
+		]
+	},
+	"modules": [
+		{
+			"type": "data",
+			"uuid": "c36a535f-f653-4c40-bd9d-c2ae0c9d12f7",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "27164eb3-2e5b-4ec7-a515-61f8df34f768",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	]
+}

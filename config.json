@@ -1,0 +1,43 @@
+{
+	"type": "minecraftBedrock",
+	"name": "Reusable-Rockets",
+	"namespace": "rr",
+	"authors": [
+		"npweber"
+	],
+	"targetVersion": "1.21.20",
+	"description": "Reusable rockets in Minecraft!",
+	"experimentalGameplay": {
+		"creationOfCustomBiomes": false,
+		"upcomingCreatorFeatures": false,
+		"enableGameTestFramework": false,
+		"educationEdition": false
+	},
+	"bdsProject": false,
+	"packs": {
+		"behaviorPack": "./BP",
+		"resourcePack": "./RP"
+	},
+	"worlds": [
+		"./worlds/*"
+	],
+	"compiler": {
+		"plugins": [
+			"generatorScripts",
+			"typeScript",
+			"entityIdentifierAlias",
+			"customEntityComponents",
+			"customItemComponents",
+			"customBlockComponents",
+			"customCommands",
+			"moLang",
+			"formatVersionCorrection",
+			[
+				"simpleRewrite",
+				{
+					"packName": "Reusable-Rockets"
+				}
+			]
+		]
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"format_version": "1.21.20",
+	"project:launchpad_block": {
+		"textures": {
+			"up": "launchpad_block_up",
+			"down": "launchpad_block",
+			"north": "launchpad_block",
+			"south": "launchpad_block",
+			"east": "launchpad_block",
+			"west": "launchpad_block"
+		},
+		"sound": "stone"
+	}
+}
