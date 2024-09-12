@@ -2,7 +2,7 @@
 	"format_version": "1.21.20",
 	"minecraft:block": {
 		"description": {
-			"identifier": "project:launchpad_block",
+			"identifier": "rr:launchpad_block",
 			"menu_category": {
 				"category": "construction",
 				"group": "itemGroup.name.concrete"

@@ -5,10 +5,10 @@
 	"texture_name": "atlas.terrain",
 	"texture_data": {
 		"launchpad_block": {
-			"textures": "textures/blocks/launchpad_block.png"
+			"textures": "textures/blocks/launchpad_block"
 		},
 		"launchpad_block_up": {
-			"textures": "textures/blocks/launchpad_block_up.png"
+			"textures": "textures/blocks/launchpad_block_up"
 		}
 	}
 }
