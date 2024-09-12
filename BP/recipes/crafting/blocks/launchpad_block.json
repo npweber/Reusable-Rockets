@@ -1,0 +1,29 @@
+{
+	"format_version": "1.21.20",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "rr:launchpad_block"
+		},
+		"tags": [
+			"crafting_table",
+			"crafter"
+		],
+		"pattern": [
+			"D",
+			"C"
+		],
+		"key": {
+			"D": "minecraft:yellow_dye",
+			"C": "minecraft:brown_concrete"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:yellow_dye"
+			},
+			{
+				"item": "minecraft:brown_concrete"
+			}
+		],
+		"result": "rr:launchpad_block"
+	}
+}
