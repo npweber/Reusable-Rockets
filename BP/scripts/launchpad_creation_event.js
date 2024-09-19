@@ -6,8 +6,6 @@ import {
     launchpad_radius
 } from "./config.js";
 
-const max_raycast_height = 200;
-
 /** @type {import("@minecraft/server").BlockCustomComponent} */
 const LaunchpadCreationEvent = {
     onPlace(event) {
@@ -28,14 +26,14 @@ const LaunchpadCreationEvent = {
     }
 }
 
-function isTopMostBlock(block, dim) {
-    let isTopMostBlock = true;
+function blockExposedToSky(block, dim) {
+    let isExposed = true;
     const bx = block.location.x;
     const by = block.location.y;
     const bz = block.location.z;
-    for (let oy = by + 1; oy <= by + max_raycast_height && isTopMostBlock; oy++)
-        isTopMostBlock = dim.getBlock({ x: bx, y: oy, z: bz }).type.id === "minecraft:air";
-    return isTopMostBlock;
+    for (let oy = by + 1; oy <= dim.heightRange.max && isExposed; oy++)
+        isExposed = dim.getBlock({ x: bx, y: oy, z: bz }).type.id === "minecraft:air";
+    return isExposed;
 }
 
 function isPartOfValidLaunchpad(block, dim) {
@@ -45,7 +43,7 @@ function isPartOfValidLaunchpad(block, dim) {
             if (ox == 0 && oz == 0)
                 continue;
             let offsetBlock = block.offset({ x: ox, y: 0, z: oz });
-            isPartOfValidLaunchpad = offsetBlock.type.id === "minecraft:brown_concrete" && isTopMostBlock(offsetBlock, dim);
+            isPartOfValidLaunchpad = offsetBlock.type.id === "minecraft:brown_concrete" && blockExposedToSky(offsetBlock, dim);
         }
     return isPartOfValidLaunchpad;
 }
