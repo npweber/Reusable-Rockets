@@ -47,7 +47,7 @@
 			],
 			"type": "script",
 			"language": "javascript",
-			"entry": "scripts/launchpad_creation_event.js"
+			"entry": "scripts/main.js"
 		}
 	],
 	"capabilities": [

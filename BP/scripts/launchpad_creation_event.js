@@ -2,7 +2,10 @@ import {
     world
 } from "@minecraft/server";
 
-const launchpad_radius = 2;
+import {
+    launchpad_radius
+} from "./config.js";
+
 const max_raycast_height = 200;
 
 /** @type {import("@minecraft/server").BlockCustomComponent} */
@@ -47,6 +50,8 @@ function isPartOfValidLaunchpad(block, dim) {
     return isPartOfValidLaunchpad;
 }
 
-world.beforeEvents.worldInitialize.subscribe(({ blockComponentRegistry }) => {
-    blockComponentRegistry.registerCustomComponent("rr:launchpad_creation_event", LaunchpadCreationEvent);
-});
+export function registerLaunchpadCreationEvent() {
+    world.beforeEvents.worldInitialize.subscribe(({ blockComponentRegistry }) => {
+        blockComponentRegistry.registerCustomComponent("rr:launchpad_creation_event", LaunchpadCreationEvent);
+    });
+}
