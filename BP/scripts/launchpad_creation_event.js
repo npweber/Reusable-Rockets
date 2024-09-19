@@ -1,6 +1,5 @@
 import {
-    world,
-    system
+    world
 } from "@minecraft/server";
 
 const launchpad_radius = 2;
@@ -13,8 +12,14 @@ const LaunchpadCreationEvent = {
         let inOverworld = dim.id === "minecraft:overworld";
         let inEnd = dim.id === "minecraft:the_end";
         if (inOverworld || inEnd) {
+            const bx = event.block.location.x;
+            const by = event.block.location.y;
+            const bz = event.block.location.z;
             if (isPartOfValidLaunchpad(event.block, dim)) {
-                world.sendMessage("Launchpad valid.")
+                world.sendMessage("Launchpad at (" + bx + "," + by + "," + bz + ") valid");
+            }
+            else {
+                world.sendMessage("Launchpad at (" + bx + "," + by + "," + bz + ") invalid");
             }
         }
     }
