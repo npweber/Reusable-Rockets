@@ -37,7 +37,21 @@
 				0,
 				0
 			]
+		},
+		{
+			"uuid": "21429a21-763e-493a-9a2b-212f41010e49",
+			"version": [
+				1,
+				0,
+				0
+			],
+			"type": "script",
+			"language": "javascript",
+			"entry": "scripts/launchpad_creation_event.js"
 		}
+	],
+	"capabilities": [
+		"script_eval"
 	],
 	"dependencies": [
 		{
@@ -47,6 +61,14 @@
 				0,
 				0
 			]
+		},
+		{
+			"module_name": "@minecraft/server",
+			"version": "1.13.0"
+		},
+		{
+			"module_name": "@minecraft/server-ui",
+			"version": "1.2.0"
 		}
 	]
 }

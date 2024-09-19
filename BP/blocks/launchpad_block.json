@@ -18,7 +18,10 @@
 			"minecraft:friction": 0.4,
 			"minecraft:map_color": "#3f1d06",
 			"minecraft:light_dampening": 15,
-			"minecraft:light_emission": 0
+			"minecraft:light_emission": 0,
+			"minecraft:custom_components": [
+				"rr:launchpad_creation_event"
+			]
 		}
 	}
 }
