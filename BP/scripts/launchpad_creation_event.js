@@ -6,9 +6,13 @@ import {
     launchpad_radius
 } from "./config.js";
 
+import {
+    promptAddLaunchpad
+} from "./add_launchpad_ui.js"
+
 /** @type {import("@minecraft/server").BlockCustomComponent} */
 const LaunchpadCreationEvent = {
-    onPlace(event) {
+    beforeOnPlayerPlace(event) {
         const dim = event.dimension;
         let inOverworld = dim.id === "minecraft:overworld";
         let inEnd = dim.id === "minecraft:the_end";
@@ -17,6 +21,7 @@ const LaunchpadCreationEvent = {
             const by = event.block.location.y;
             const bz = event.block.location.z;
             if (isPartOfValidLaunchpad(event.block, dim)) {
+                promptAddLaunchpad(event.player, bx, bz);
                 world.sendMessage("Launchpad at (" + bx + "," + by + "," + bz + ") valid");
             }
             else {
