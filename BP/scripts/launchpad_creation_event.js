@@ -11,13 +11,31 @@ import {
     addLaunchpadPrompt
 } from "./add_launchpad_ui.js"
 
-// Collection of concrete blocks in Minecraft: Bedrock Edition.
-// --------------------------------------------------------------
-// Concrete blocks surround the launchpad_block to form a launchpad.
+/*
+Collection of concrete blocks in Minecraft: Bedrock Edition.
+--------------------------------------------------------------
+Concrete blocks surround the launchpad_block to form a launchpad.
 
-// Need to maintain that .endsWith("concrete") is the condition to get
-// all block types of concrete.
+NOTE: Need to maintain that .endsWith("concrete") is a working condition to get
+all block types of concrete.
+*/
 const concreteTypes = BlockTypes.getAll().filter((type) => type.id.endsWith("concrete"));
+
+/*
+Launchpad Creation Event
+--------------------------
+Trigger: Launchpad block is placed.
+
+Criteria for success:
+Launchpad block is in the overworld or end dimension.
+Launchpad block is the center of a radial square of Concrete blocks. This radial square can be defined as a "potential launchpad".
+The potential launchpad has a square radius of at least the configured launchpad_radius value.
+The potential launchpad has appropriate exposure to the sky.
+
+On success:
+Minecraft considers the potential launchpad to be a valid launchpad.
+Custom UI asks the player if they want to add this valid launchpad as a Launchpad destination to the Flight Map.
+*/
 
 /** @type {import("@minecraft/server").BlockCustomComponent} */
 const LaunchpadCreationEvent = {
@@ -34,6 +52,12 @@ const LaunchpadCreationEvent = {
                 addLaunchpadPrompt.show(player).then((response) => {
                     if (response.formValues !== undefined) {
                         const launchpadId = response.formValues[0];
+
+                        // Add scoreboard objectives to save launchpad block
+                        // XYZ used to identify where launchpad destinations are.
+
+                        // XYZ Scoreboard objectives are specific to the player who
+                        // created the launchpad destination. The creator owns the launchpad.
                         if (launchpadId.length > 0) {
                             const launchpadXObjId = launchpadId + "-launchpad-X"
                             const launchpadXObj = world.scoreboard.addObjective(launchpadXObjId);
