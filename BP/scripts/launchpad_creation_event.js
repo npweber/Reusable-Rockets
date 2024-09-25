@@ -1,19 +1,29 @@
 import {
-    world
+    world,
+    BlockTypes
 } from "@minecraft/server";
 
 import {
     launchpad_radius
-} from "./config.js";
+} from "./values.js";
 
 import {
-    promptAddLaunchpad
+    addLaunchpadPrompt
 } from "./add_launchpad_ui.js"
+
+// Collection of concrete blocks in Minecraft: Bedrock Edition.
+// --------------------------------------------------------------
+// Concrete blocks surround the launchpad_block to form a launchpad.
+
+// Need to maintain that .endsWith("concrete") is the condition to get
+// all block types of concrete.
+const concreteTypes = BlockTypes.getAll().filter((type) => type.id.endsWith("concrete"));
 
 /** @type {import("@minecraft/server").BlockCustomComponent} */
 const LaunchpadCreationEvent = {
     beforeOnPlayerPlace(event) {
         const dim = event.dimension;
+        const player = event.player;
         let inOverworld = dim.id === "minecraft:overworld";
         let inEnd = dim.id === "minecraft:the_end";
         if (inOverworld || inEnd) {
@@ -21,11 +31,31 @@ const LaunchpadCreationEvent = {
             const by = event.block.location.y;
             const bz = event.block.location.z;
             if (isPartOfValidLaunchpad(event.block, dim)) {
-                promptAddLaunchpad(event.player, bx, bz);
-                world.sendMessage("Launchpad at (" + bx + "," + by + "," + bz + ") valid");
+                addLaunchpadPrompt.show(player).then((response) => {
+                    if (response.formValues !== undefined) {
+                        const launchpadId = response.formValues[0];
+                        if (launchpadId.length > 0) {
+                            const launchpadXObjId = launchpadId + "-launchpad-X"
+                            const launchpadXObj = world.scoreboard.addObjective(launchpadXObjId);
+                            launchpadXObj.addScore(player, bx);
+
+                            const launchpadYObjId = launchpadId + "-launchpad-Y"
+                            const launchpadYObj = world.scoreboard.addObjective(launchpadYObjId);
+                            launchpadYObj.addScore(player, by);
+
+                            const launchpadZObjId = launchpadId + "-launchpad-Z"
+                            const launchpadZObj = world.scoreboard.addObjective(launchpadZObjId);
+                            launchpadZObj.addScore(player, bz);
+                        }
+                        else {
+                            player.sendMessage("No name given for Launchpad destination.");
+                        }
+                    }
+                });
             }
+            // Keep for debugging temporarily.
             else {
-                world.sendMessage("Launchpad at (" + bx + "," + by + "," + bz + ") invalid");
+                player.sendMessage("Launchpad at (" + bx + "," + by + "," + bz + ") invalid");
             }
         }
     }
@@ -41,6 +71,8 @@ function blockExposedToSky(block, dim) {
     return isExposed;
 }
 
+function isConcrete(type) { return concreteTypes.find((concreteType) => concreteType === type) !== undefined; }
+
 function isPartOfValidLaunchpad(block, dim) {
     let isPartOfValidLaunchpad = true;
     for (let ox = -launchpad_radius; ox <= launchpad_radius && isPartOfValidLaunchpad; ox++)
@@ -48,7 +80,7 @@ function isPartOfValidLaunchpad(block, dim) {
             if (ox == 0 && oz == 0)
                 continue;
             let offsetBlock = block.offset({ x: ox, y: 0, z: oz });
-            isPartOfValidLaunchpad = offsetBlock.type.id === "minecraft:brown_concrete" && blockExposedToSky(offsetBlock, dim);
+            isPartOfValidLaunchpad = isConcrete(offsetBlock.type) && blockExposedToSky(offsetBlock, dim);
         }
     return isPartOfValidLaunchpad;
 }
