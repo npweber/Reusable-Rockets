@@ -1,1 +1,0 @@
-export const launchpad_radius = 2;
